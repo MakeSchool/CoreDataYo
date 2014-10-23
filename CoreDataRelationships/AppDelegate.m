@@ -42,6 +42,10 @@
     Department* salesDepartment = [NSEntityDescription insertNewObjectForEntityForName:@"Department" inManagedObjectContext:context];
     salesDepartment.name = @"Sales";
     salesDepartment.address = corporateHQAddress;
+    
+    Department* manufacturing = [NSEntityDescription insertNewObjectForEntityForName:@"Department" inManagedObjectContext:context];
+    manufacturing.name = @"Manufacturing";
+    manufacturing.address = corporateHQAddress;
 
     Department* executiveDepartment = [NSEntityDescription insertNewObjectForEntityForName:@"Department" inManagedObjectContext:context];
     executiveDepartment.name = @"Executive";
@@ -54,18 +58,29 @@
     ianTheExecutive.hireDate = [NSDate dateWithTimeIntervalSince1970:674000.0f];
     ianTheExecutive.salary = @425000; // Plus stock and benefits
     ianTheExecutive.department = executiveDepartment;
-    ianTheExecutive.tpsReportsFiled = @0;
+    ianTheExecutive.tpsReportsFiled = @1000;
     
     Manager* martyTheManager = [NSEntityDescription insertNewObjectForEntityForName:@"Manager" inManagedObjectContext:context];
     martyTheManager.firstName = @"Marty";
     martyTheManager.lastName = @"Mr. Manager";
     martyTheManager.jobTitle = @"Sales Management Superstar";
-    martyTheManager.hireDate = [NSDate dateWithTimeIntervalSince1970:674000.0f];
+    martyTheManager.hireDate = [NSDate date];
     martyTheManager.salary = @50000;
     martyTheManager.department = salesDepartment;
-    martyTheManager.tpsReportsFiled = @72;
+    martyTheManager.tpsReportsFiled = @4367;
+    martyTheManager.managedBy = ianTheExecutive;
     
-    salesDepartment.manager = martyTheManager;
+    Manager* johnTheManager = [NSEntityDescription insertNewObjectForEntityForName:@"Manager" inManagedObjectContext:context];
+    johnTheManager.firstName = @"John";
+    johnTheManager.lastName = @"Johnson";
+    johnTheManager.jobTitle = @"Manufacturing Management";
+    johnTheManager.hireDate = [NSDate date];
+    johnTheManager.salary = @52300;
+    johnTheManager.department = manufacturing;
+    johnTheManager.tpsReportsFiled = @2;
+    johnTheManager.managedBy = ianTheExecutive;
+    
+    manufacturing.manager = johnTheManager;
     
     BurgerFlipper* bobTheBurgerFlipper = [NSEntityDescription insertNewObjectForEntityForName:@"BurgerFlipper" inManagedObjectContext:context];
     bobTheBurgerFlipper.firstName = @"Bob";
@@ -73,7 +88,7 @@
     bobTheBurgerFlipper.jobTitle = @"Line Cook";
     bobTheBurgerFlipper.hireDate = [NSDate dateWithTimeIntervalSinceNow:-1000000];
     bobTheBurgerFlipper.salary = @16000;
-    bobTheBurgerFlipper.department = salesDepartment;
+    bobTheBurgerFlipper.department = manufacturing;
     bobTheBurgerFlipper.burgersFlipped = @7650;
     bobTheBurgerFlipper.managedBy = martyTheManager;
     
@@ -83,7 +98,7 @@
     marcoTheBurgerFlipper.jobTitle = @"Line Cook";
     marcoTheBurgerFlipper.hireDate = [NSDate dateWithTimeIntervalSinceNow:-1500000];
     marcoTheBurgerFlipper.salary = @20000;
-    marcoTheBurgerFlipper.department = salesDepartment;
+    marcoTheBurgerFlipper.department = manufacturing;
     marcoTheBurgerFlipper.burgersFlipped = @15432;
     marcoTheBurgerFlipper.managedBy = martyTheManager;
     
@@ -93,7 +108,7 @@
     donnyTheBurgerFlipper.jobTitle = @"Line Cook";
     donnyTheBurgerFlipper.hireDate = [NSDate dateWithTimeIntervalSinceNow:-2300000];
     donnyTheBurgerFlipper.salary = @22000;
-    donnyTheBurgerFlipper.department = salesDepartment;
+    donnyTheBurgerFlipper.department = manufacturing;
     donnyTheBurgerFlipper.burgersFlipped = @34890;
     donnyTheBurgerFlipper.managedBy = martyTheManager;
     
