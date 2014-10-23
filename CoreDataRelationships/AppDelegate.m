@@ -110,7 +110,17 @@
     donnyTheBurgerFlipper.salary = @22000;
     donnyTheBurgerFlipper.department = manufacturing;
     donnyTheBurgerFlipper.burgersFlipped = @34890;
+    
+
     donnyTheBurgerFlipper.managedBy = martyTheManager;
+    
+    // Core data creates the inverse relationship for us
+    // This is done implicitly by the above code
+    
+    NSMutableSet* martysEmployees = [martyTheManager.manages mutableCopy];
+    [martysEmployees addObject:donnyTheBurgerFlipper];
+    martyTheManager.manages = [NSSet setWithSet:martysEmployees];
+
     
     
     NSError* error;

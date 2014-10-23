@@ -89,11 +89,11 @@
     
     switch (row % 5)
     {
-        case 0: color = [UIColor colorWithRed:26/255.0f green:188/255.0f blue:156/255.0f alpha:1.0f]; break;
+        case 0: color = [UIColor colorWithRed:52/255.0f green:73/255.0f blue:94/255.0f alpha:1.0f]; break;
         case 1: color = [UIColor colorWithRed:46/255.0f green:204/255.0f blue:113/255.0f alpha:1.0f]; break;
         case 2: color = [UIColor colorWithRed:52/255.0f green:152/255.0f blue:219/255.0f alpha:1.0f]; break;
         case 3: color = [UIColor colorWithRed:155/255.0f green:89/255.0f blue:182/255.0f alpha:1.0f]; break;
-        case 4: color = [UIColor colorWithRed:52/255.0f green:73/255.0f blue:94/255.0f alpha:1.0f]; break;
+        case 4: color = [UIColor colorWithRed:26/255.0f green:188/255.0f blue:156/255.0f alpha:1.0f]; break;
     }
     
     return color;
@@ -144,8 +144,9 @@
 
 - (void)fetchRequestFromName:(NSString*)name
 {
-    NSManagedObjectModel* model = ((AppDelegate*) [UIApplication sharedApplication].delegate).managedObjectModel;
-    NSManagedObjectContext* context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+    NSManagedObjectModel* model = appDelegate.managedObjectModel;
+    NSManagedObjectContext* context = appDelegate.managedObjectContext;
     
     NSFetchRequest* fetchRequest = [[model fetchRequestTemplateForName:name] copy];
     
@@ -154,7 +155,27 @@
     
     if (!tableData)
     {
-        NSLog(@"OH GEEZE IT'S STILL WRONG");
+        NSLog(@"OH GEEZE IT'S ALL GONE WRONG");
+    }
+}
+
+- (void)fetchByLastName:(NSString*)lastName
+{
+    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+    NSManagedObjectModel* model = appDelegate.managedObjectModel;
+    NSManagedObjectContext* context = appDelegate.managedObjectContext;
+    
+    NSDictionary* substitutionDictionary = @{@"LAST_NAME" : lastName};
+    
+    NSFetchRequest* fetchRequest = [model fetchRequestFromTemplateWithName:@"LastName"
+                                                     substitutionVariables:substitutionDictionary];
+    
+    NSError* error;
+    tableData = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if (!tableData)
+    {
+        NSLog(@"OH GEEZE IT'S ALL GONE WRONG");
     }
 }
 
