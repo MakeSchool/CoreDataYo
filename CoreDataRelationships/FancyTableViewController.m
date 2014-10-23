@@ -47,45 +47,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)fetchAllEmployees
-{
-    NSManagedObjectContext* context = ((AppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
-
-    NSEntityDescription* entityDescription = [NSEntityDescription entityForName:@"Employee" inManagedObjectContext:context];
-    
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:entityDescription];
-    
-    // create an error variable to pass to the execute method
-    NSError *error;
-    
-    // retrieve results
-    tableData = [context executeFetchRequest:request error:&error];
-    
-    if (tableData == nil)
-    {
-        NSLog(@"OH GEEZE IT'S ALL GONE WRONG");
-    }
-}
-
-- (UIColor*)colorForCellAtIndexPath:(NSIndexPath*)indexPath
-{
-    NSInteger row = indexPath.row;
-    
-    UIColor* color;
-    
-    switch (row % 5)
-    {
-        case 0: color = [UIColor colorWithRed:26/255.0f green:188/255.0f blue:156/255.0f alpha:1.0f]; break;
-        case 1: color = [UIColor colorWithRed:46/255.0f green:204/255.0f blue:113/255.0f alpha:1.0f]; break;
-        case 2: color = [UIColor colorWithRed:52/255.0f green:152/255.0f blue:219/255.0f alpha:1.0f]; break;
-        case 3: color = [UIColor colorWithRed:155/255.0f green:89/255.0f blue:182/255.0f alpha:1.0f]; break;
-        case 4: color = [UIColor colorWithRed:52/255.0f green:73/255.0f blue:94/255.0f alpha:1.0f]; break;
-    }
-    
-    return color;
-}
-
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -120,21 +81,81 @@
     return cell;
 }
 
+- (UIColor*)colorForCellAtIndexPath:(NSIndexPath*)indexPath
+{
+    NSInteger row = indexPath.row;
+    
+    UIColor* color;
+    
+    switch (row % 5)
+    {
+        case 0: color = [UIColor colorWithRed:26/255.0f green:188/255.0f blue:156/255.0f alpha:1.0f]; break;
+        case 1: color = [UIColor colorWithRed:46/255.0f green:204/255.0f blue:113/255.0f alpha:1.0f]; break;
+        case 2: color = [UIColor colorWithRed:52/255.0f green:152/255.0f blue:219/255.0f alpha:1.0f]; break;
+        case 3: color = [UIColor colorWithRed:155/255.0f green:89/255.0f blue:182/255.0f alpha:1.0f]; break;
+        case 4: color = [UIColor colorWithRed:52/255.0f green:73/255.0f blue:94/255.0f alpha:1.0f]; break;
+    }
+    
+    return color;
+}
+
 #pragma mark - Button Actions
 
 - (IBAction)actionBurgerKings:(id)sender
 {
-    
+    [self fetchRequestFromName:@"BurgerKings"];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationRight];
 }
 
 - (IBAction)actionExpensiveEmployees:(id)sender
 {
-    
+    [self fetchRequestFromName:@"ExpensiveEmployees"];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationMiddle];
 }
 
 - (IBAction)actionLazyManagers:(id)sender
 {
+    [self fetchRequestFromName:@"LazyManagers"];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
+}
+
+#pragma mark - Fetch Requests
+
+- (void)fetchAllEmployees
+{
+    NSManagedObjectContext* context = ((AppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
     
+    NSEntityDescription* entityDescription = [NSEntityDescription entityForName:@"Employee" inManagedObjectContext:context];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    
+    // create an error variable to pass to the execute method
+    NSError *error;
+    
+    // retrieve results
+    tableData = [context executeFetchRequest:request error:&error];
+    
+    if (!tableData)
+    {
+        NSLog(@"OH GEEZE IT'S ALL GONE WRONG");
+    }
+}
+
+- (void)fetchRequestFromName:(NSString*)name
+{
+    NSManagedObjectModel* model = ((AppDelegate*) [UIApplication sharedApplication].delegate).managedObjectModel;
+    NSManagedObjectContext* context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    NSFetchRequest* fetchRequest = [[model fetchRequestTemplateForName:name] copy];
+    
+    NSError* error;
+    tableData = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if (!tableData)
+    {
+        NSLog(@"OH GEEZE IT'S STILL WRONG");
+    }
 }
 
 @end

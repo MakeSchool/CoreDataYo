@@ -29,7 +29,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="actionBurgerKings:" destination="BYZ-38-t0r" eventType="touchDragInside" id="VPd-LH-e09"/>
+                                            <action selector="actionBurgerKings:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KPS-xO-iDJ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="cTh-ug-4fc">
@@ -41,7 +41,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="actionExpensiveEmployees:" destination="BYZ-38-t0r" eventType="touchDragInside" id="NJc-mV-geL"/>
+                                            <action selector="actionExpensiveEmployees:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X5V-Hs-EPa"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="tsc-Ix-4XO">
@@ -53,7 +53,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="actionLazyManagers:" destination="BYZ-38-t0r" eventType="touchDragInside" id="FWC-8U-TLP"/>
+                                            <action selector="actionLazyManagers:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ymp-N4-qxg"/>
                                         </connections>
                                     </button>
                                 </subviews>

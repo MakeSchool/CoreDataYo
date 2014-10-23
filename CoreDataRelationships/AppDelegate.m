@@ -103,33 +103,8 @@
     {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
-    
-    // ----------------------------------------------------------
-    //                Read Stuff from Database
-    // ----------------------------------------------------------
-    
-    [self runFetchRequests];
 
     return YES;
-}
-
-- (void)runFetchRequests
-{
-    NSManagedObjectModel* model = ((AppDelegate*) [UIApplication sharedApplication].delegate).managedObjectModel;
-    NSManagedObjectContext* context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
-    
-    NSFetchRequest* fetchRequest = [[model fetchRequestTemplateForName:@"BurgerKings"] copy];
-    
-    NSError* error;
-    NSArray* fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
-    
-    if (!error)
-    {    
-        for (BurgerFlipper* burgerFlipper in fetchedObjects)
-        {
-            [self printEmployee:burgerFlipper];
-        }
-    }
 }
 
 - (void)printEmployee:(Employee*)employee
