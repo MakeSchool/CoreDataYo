@@ -37,7 +37,7 @@
     </entity>
     <fetchRequest name="BurgerKings" entity="BurgerFlipper" predicateString="burgersFlipped &gt; 1"/>
     <fetchRequest name="ExpensiveEmployees" entity="Employee" predicateString="salary &gt; 100000"/>
-    <fetchRequest name="LastName" entity="Employee" predicateString="lastName CONTAINS &quot;LAST_NAME&quot;"/>
+    <fetchRequest name="LastName" entity="Employee" predicateString="lastName == $LASTNAME" fetchLimit="10" fetchBatchSize="10" includeSubentities="YES" includePropertyValues="YES"/>
     <fetchRequest name="LazyManagers" entity="Manager" predicateString="tpsReportsFiled &lt;= 5"/>
     <elements>
         <element name="Address" positionX="115" positionY="-378" width="128" height="133"/>

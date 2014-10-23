@@ -165,7 +165,7 @@
     NSManagedObjectModel* model = appDelegate.managedObjectModel;
     NSManagedObjectContext* context = appDelegate.managedObjectContext;
     
-    NSDictionary* substitutionDictionary = @{@"LAST_NAME" : lastName};
+    NSDictionary* substitutionDictionary = @{@"LASTNAME" : lastName};
     
     NSFetchRequest* fetchRequest = [model fetchRequestFromTemplateWithName:@"LastName"
                                                      substitutionVariables:substitutionDictionary];
